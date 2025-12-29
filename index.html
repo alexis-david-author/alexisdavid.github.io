@@ -5,39 +5,93 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Alexis David | Author</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Quicksand&display=swap" rel="stylesheet">
-  <style>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+
+ <style>
     :root {
-      --dusty-rose: #d4a5a5;
-      --cream: #f8f5ec;
-      --rose-dark: #b08686;
-      --brown: #4a3f35;
-      --tan: #e6d5c4;
-      --tan2: #d2bfa3;
+      /* base surfaces */
+      --paper: #f7f3ec;
+      --paper-soft: #fbf8f3;
+
+      /* text */
+      --ink: #3a342f;
+      --ink-soft: #6b5f55;
+
+      /* accent colors */
+      --rose: #c79a9a;
+      --rose-deep: #a86f6f;
+      --moss: #5f6f64;
+      --twilight: #2c3440;
+      --gold: #c6a86a;
+
+      /* utility */
+      --shadow: rgba(44, 52, 64, 0.12);
+
+      /* compatibility aliases for existing CSS in this file */
+      --parchment: var(--paper);
+      --cream: var(--paper-soft);
+      --brown: var(--ink);
+      --tan: #efe6d1;
+      --tan2: #efe8df;
+      --dusty-rose: var(--rose);
+      --rose-dark: var(--rose-deep);
+      --forest: var(--moss);
+      --midnight: var(--twilight);
+      --antique-gold: var(--gold);
     }
+
     body {
       margin: 0;
       font-family: 'Quicksand', sans-serif;
-      background-color: var(--cream);
-      color: var(--brown);
+      background-color: var(--paper);
+      color: var(--ink);
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+      opacity: 0.25;
+      pointer-events: none;
+      z-index: 999;
     }
     header {
-      background-color: var(--tan);
+      position: relative;
+      background: linear-gradient(
+        to bottom,
+        var(--twilight),
+        var(--moss)
+      );
+      color: var(--paper-soft);
       padding: 2rem;
       text-align: center;
       font-family: 'Playfair Display', serif;
-      color: var(--brown);
     }
     header h1 {
       font-size: 3rem;
       margin: 0;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.25);
+
     }
     header p {
       font-size: 1.25rem;
       margin: 0.5rem 0 0;
       font-style: italic;
     }
+    header::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        circle at 20% 30%,
+        rgba(255,255,255,0.15),
+        transparent 40%
+      );
+      pointer-events: none;
+    }
     nav {
-      background-color: var(--tan2);
+      background-color: var(--paper-soft);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
       display: flex;
       justify-content: center;
       gap: 2rem;
@@ -45,10 +99,11 @@
     }
     nav a {
       text-decoration: none;
-      color: var(--brown);
+      color: var(--ink-soft);
       font-weight: bold;
     }
     nav a:hover {
+      color: var(--rose-deep);
       text-decoration: underline;
     }
     .main-content {
@@ -216,6 +271,45 @@
       background-color: var(--rose-dark);
       color: white;
     }
+    .book-card,
+    .main-content,
+    section {
+      box-shadow: 0 10px 30px var(--shadow);
+    }
+      h1, h2, h3 {
+        letter-spacing: 0.04em;
+      }
+      header p,
+      .genre,
+      blockquote {
+        font-family: 'Special Elite', cursive;
+        opacity: 0.85;
+      }
+      .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 1.2s ease, transform 1.2s ease;
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .cta-button,
+      section#books .book-card a,
+      .contact-section button {
+        background-color: var(--rose);
+        color: var(--paper-soft);
+      }
+
+      .cta-button:hover,
+      section#books .book-card a:hover,
+      .contact-section button:hover {
+        background-color: var(--rose-deep);
+      }
+      section:nth-of-type(even) {
+        background-color: var(--paper);
+      }
   </style>
 </head>
 <body>
@@ -238,6 +332,9 @@
     <p>I write stories about young adults navigating love, identity, and the strange convolutions of growing up. If you're looking for a blend of tenderness and suspense, you're in the right place.</p>
     <a class="cta-button" href="#books">Explore My Books</a>
   </div>
+
+  <section id="about" class="fade-in">
+
 
   <section id="about">
     <h2>Meet Alexis David</h2>
@@ -345,6 +442,18 @@
       <button type="submit">Send Message</button>
     </form>
   </section>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    });
+
+    document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
+  </script>
 
 </body>
 </html>
