@@ -4,48 +4,39 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Alexis David | Author</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Quicksand&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
 
- <style>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Quicksand:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================
+       COLOR PALETTE & VARIABLES
+    ========================= */
     :root {
-      /* base surfaces */
       --paper: #f7f3ec;
       --paper-soft: #fbf8f3;
-
-      /* text */
       --ink: #3a342f;
       --ink-soft: #6b5f55;
-
-      /* accent colors */
       --rose: #c79a9a;
       --rose-deep: #a86f6f;
       --moss: #5f6f64;
       --twilight: #2c3440;
       --gold: #c6a86a;
-
-      /* utility */
-      --shadow: rgba(44, 52, 64, 0.12);
-
-      /* compatibility aliases for existing CSS in this file */
-      --parchment: var(--paper);
-      --cream: var(--paper-soft);
-      --brown: var(--ink);
-      --tan: #efe6d1;
-      --tan2: #efe8df;
-      --dusty-rose: var(--rose);
-      --rose-dark: var(--rose-deep);
-      --forest: var(--moss);
-      --midnight: var(--twilight);
-      --antique-gold: var(--gold);
+      --shadow: rgba(44, 52, 64, 0.22);
     }
 
+    /* =========================
+       GLOBAL STYLES
+    ========================= */
     body {
       margin: 0;
       font-family: 'Quicksand', sans-serif;
       background-color: var(--paper);
       color: var(--ink);
+      line-height: 1.6;
+      overflow-x: hidden;
     }
+
+    /* Subtle Paper Texture Overlay */
     body::before {
       content: "";
       position: fixed;
@@ -55,405 +46,435 @@
       pointer-events: none;
       z-index: 999;
     }
-    header {
-      position: relative;
-      background: linear-gradient(
-        to bottom,
-        var(--twilight),
-        var(--moss)
-      );
-      color: var(--paper-soft);
-      padding: 2rem;
-      text-align: center;
-      font-family: 'Playfair Display', serif;
-    }
-    header h1 {
-      font-size: 3rem;
-      margin: 0;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.25);
 
+    section {
+      padding: 5rem 1.5rem;
+      text-align: center;
     }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      letter-spacing: 0.04em;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+    }
+
+    h2::after {
+      content: " ✦";
+      color: var(--gold);
+      font-size: 0.8em;
+    }
+
+    p {
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    a {
+      transition: all 0.3s ease;
+    }
+
+    /* =========================
+       HEADER + NAV
+    ========================= */
+    header {
+      background: linear-gradient(to bottom, var(--twilight), var(--moss));
+      color: var(--paper-soft);
+      padding: 4rem 1.5rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 3.5rem;
+      margin: 0;
+    }
+
     header p {
-      font-size: 1.25rem;
-      margin: 0.5rem 0 0;
-      font-style: italic;
+      font-family: 'Special Elite', cursive;
+      font-size: 1.2rem;
+      opacity: 0.85;
+      margin-top: 1rem;
     }
-    header::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(
-        circle at 20% 30%,
-        rgba(255,255,255,0.15),
-        transparent 40%
-      );
-      pointer-events: none;
-    }
+
     nav {
       background-color: var(--paper-soft);
-      border-bottom: 1px solid rgba(0,0,0,0.05);
       display: flex;
       justify-content: center;
+      flex-wrap: wrap;
       gap: 2rem;
-      padding: 1rem;
+      padding: 1.2rem;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
+
     nav a {
       text-decoration: none;
       color: var(--ink-soft);
-      font-weight: bold;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
     }
+
     nav a:hover {
       color: var(--rose-deep);
-      text-decoration: underline;
     }
-    .main-content {
-      padding: 3rem 1rem;
-      max-width: 800px;
-      margin: auto;
-      text-align: center;
+
+    /* =========================
+       ANIMATIONS
+    ========================= */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1.2s ease, transform 1.2s ease;
     }
-    .main-content h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: var(--brown);
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
-    .main-content p {
+
+    /* =========================
+       ABOUT SECTION
+    ========================= */
+    #about div {
+      text-align: left;
       font-size: 1.1rem;
-      line-height: 1.6;
+      line-height: 1.8;
     }
-    .cta-button {
+
+    /* =========================
+       BOOKS SECTION
+    ========================= */
+    .book-listing {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 3rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .book-card {
+      position: relative;
+      background: linear-gradient(to bottom, #fbf8f3, #f3eee7);
+      border-radius: 18px 18px 14px 14px;
+      padding: 1.75rem;
+      width: 300px;
+      text-align: left;
+      box-shadow: 0 18px 35px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.6);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .book-card:hover {
+      transform: translateY(-8px) rotate(-0.5deg);
+      box-shadow: 0 28px 55px rgba(44,52,64,0.3);
+    }
+
+    .book-card img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+    }
+
+    .genre {
+      font-family: 'Special Elite', cursive;
+      color: var(--moss);
+      font-size: 0.85rem;
+      margin: 0.5rem 0;
+    }
+
+    .book-card h3 {
+      margin: 0.5rem 0;
+      font-size: 1.4rem;
+    }
+
+    .book-card a, .cta-btn {
       display: inline-block;
-      margin-top: 2rem;
-      padding: 0.75rem 1.5rem;
-      background-color: var(--dusty-rose);
+      margin-top: 1rem;
+      background-color: var(--rose);
       color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
       text-decoration: none;
-      border-radius: 8px;
       font-weight: bold;
-      border: none;
+      font-size: 0.9rem;
     }
-    .cta-button:hover {
-      background-color: var(--rose-dark);
-      color: white;
+
+    .book-card a:hover, .cta-btn:hover {
+      background-color: var(--rose-deep);
     }
-    .contact-section {
-      background-color: #f9f4ef;
-      padding: 3rem 1rem;
-      text-align: center;
+
+    /* =========================
+       READ SAMPLES (CARDS)
+    ========================= */
+    #samples {
+      background-color: rgba(255, 255, 255, 0.3);
     }
-    .contact-section h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      color: var(--brown);
+
+    .sample-card {
+      background-color: var(--paper-soft);
+      border: 1px solid #e1dad2;
+      border-radius: 12px;
+      padding: 2rem;
+      width: 280px;
+      text-align: left;
     }
-    .contact-section form {
-      max-width: 600px;
+
+    /* =========================
+       OBSESSIONS CAROUSEL
+    ========================= */
+    #obsessions {
+      background-color: var(--paper-soft);
+    }
+
+    .obsession-container {
+      max-width: 520px;
+      margin: 2.5rem auto 0;
+      position: relative;
+      min-height: 300px;
+    }
+
+    .obsession {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1.4s ease;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .obsession.active {
+      opacity: 1;
+    }
+
+    .obsession h3 {
+      font-family: 'Special Elite', cursive;
+      color: var(--moss);
+      margin-bottom: 1rem;
+    }
+
+    .obsession img {
+      max-width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 14px;
+      margin-top: 1rem;
+    }
+
+    .caption {
+      font-family: 'Special Elite', cursive;
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+      margin-top: 0.5rem;
+    }
+
+    /* =========================
+       NEWSLETTER & CONTACT
+    ========================= */
+    #newsletter {
+      background-color: var(--twilight);
+      color: var(--paper-soft);
+    }
+
+    #newsletter h2 { color: white; }
+
+    form {
+      max-width: 500px;
       margin: 2rem auto;
       display: flex;
       flex-direction: column;
       gap: 1rem;
     }
-    .contact-section input,
-    .contact-section textarea {
-      padding: 0.75rem;
-      border: 1px solid #ccc;
+
+    input, textarea {
+      padding: 0.85rem;
       border-radius: 6px;
+      border: 1px solid rgba(0,0,0,0.1);
       font-family: 'Quicksand', sans-serif;
       font-size: 1rem;
     }
-    .contact-section button {
-      padding: 0.75rem;
-      background-color: var(--dusty-rose);
+
+    button {
+      background-color: var(--rose);
       color: white;
+      padding: 1rem;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
       font-weight: bold;
       cursor: pointer;
-    }
-    .contact-section button:hover {
-      background-color: var(--rose-dark);
-      color: white;
-    }
-    section#about {
-      background-color: #f9f4ef;
-      padding: 3rem 1rem;
-      text-align: center;
-      font-family: 'Quicksand', sans-serif;
-    }
-    section#about h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      color: var(--brown);
-    }
-    section#about div,
-    section#about ul {
-      color: var(--brown);
-    }
-    section#about ul {
-      list-style: none;
-      padding-left: 0;
-      text-align: left;
       font-size: 1rem;
-      line-height: 1.8;
+      transition: 0.3s;
     }
-    section#about li {
-      margin-bottom: 0.5rem;
-      position: relative;
-      padding-left: 1.2em;
-    }
-    section#about li::before {
-      content: "•";
-      color: var(--dusty-rose);
-      position: absolute;
-      left: 0;
-      font-size: 1.2em;
-      top: 0;
-    }
-    section#books {
-      background-color: var(--cream);
-      padding: 4rem 1rem;
-      text-align: center;
-      font-family: 'Quicksand', sans-serif;
-    }
-    section#books h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      color: var(--brown);
-    }
-    section#books .book-listing {
-      max-width: 1000px;
-      margin: 2rem auto;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
-    }
-    section#books .book-card {
-      background-color: #f9f4ef;
-      border: 1px solid #e1dad2;
-      border-radius: 12px;
-      padding: 1.5rem;
-      width: 280px;
-      text-align: left;
-      color: var(--brown);
-    }
-    section#books .book-card img {
-      width: 100%;
-      border-radius: 8px;
-      margin-bottom: 1rem;
-    }
-    section#books .book-card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      color: var(--brown);
-      margin: 0.5rem 0;
-    }
-    section#books .book-card p {
-      color: var(--brown);
-      font-size: 1rem;
-    }
-    section#books .book-card .genre {
-      font-size: 0.9rem;
-      color: var(--rose-dark);
-      font-style: italic;
-    }
-    section#books .book-card a {
-      display: inline-block;
-      margin-top: 1rem;
-      background-color: var(--dusty-rose);
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      text-decoration: none;
-    }
-    section#books .book-card a:hover {
-      background-color: var(--rose-dark);
-      color: white;
-    }
-    .book-card,
-    .main-content,
-    section {
-      box-shadow: 0 10px 30px var(--shadow);
-    }
-      h1, h2, h3 {
-        letter-spacing: 0.04em;
-      }
-      header p,
-      .genre,
-      blockquote {
-        font-family: 'Special Elite', cursive;
-        opacity: 0.85;
-      }
-      .fade-in {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 1.2s ease, transform 1.2s ease;
-      }
 
-      .fade-in.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      .cta-button,
-      section#books .book-card a,
-      .contact-section button {
-        background-color: var(--rose);
-        color: var(--paper-soft);
-      }
+    button:hover {
+      background-color: var(--rose-deep);
+    }
 
-      .cta-button:hover,
-      section#books .book-card a:hover,
-      .contact-section button:hover {
-        background-color: var(--rose-deep);
-      }
-      section:nth-of-type(even) {
-        background-color: var(--paper);
-      }
   </style>
 </head>
+
 <body>
 
-  <header>
-    <h1>Alexis David</h1>
-    <p>Cozy nights. Hidden magic. Emotional rollercoasters</p>
-  </header>
+<header>
+  <h1>Alexis David</h1>
+  <p>Cozy nights. Hidden magic. Emotional rollercoasters</p>
+</header>
 
-  <nav>
-    <a href="#about">About</a>
-    <a href="#books">Books</a>
-    <a href="#samples">Read</a>
-    <a href="#newsletter">Newsletter</a>
-    <a href="#contact">Contact</a>
-  </nav>
+<nav>
+  <a href="#about">About</a>
+  <a href="#books">Books</a>
+  <a href="#samples">Read</a>
+  <a href="#obsessions">Obsessions</a>
+  <a href="#newsletter">Newsletter</a>
+  <a href="#contact">Contact</a>
+</nav>
 
-  <div class="main-content">
-    <h2>Welcome to the world of Alexis David</h2>
-    <p>I write stories about young adults navigating love, identity, and the strange convolutions of growing up. If you're looking for a blend of tenderness and suspense, you're in the right place.</p>
-    <a class="cta-button" href="#books">Explore My Books</a>
+<section id="about" class="fade-in">
+  <h2>Meet Alexis David</h2>
+  <div style="max-width: 750px; margin: auto;">
+    <p>
+      Hi, I'm <strong>Alexis David</strong> — a writer of cozy chaos and quiet intensity. I write stories for the young adult who stays up late wondering who they are, for the dreamer who believes there's magic hiding in the unremarkable.
+    </p>
+    <p>
+      My work spans <em>young adult</em>, <em>coming-of-age</em>, <em>thrillers</em>, and <em>LGBTQ+ fiction</em>. I’m drawn to characters who are figuring things out — imperfectly, beautifully, and often while holding onto secrets.
+    </p>
+    <p>
+      When I’m not writing, you’ll find me thrifting, playing with my cat, or learning weird facts at 2 a.m. I believe in softness, indestructible friendships, and characters who break your heart just a little.
+    </p>
   </div>
+</section>
 
-  <section id="about" class="fade-in">
-
-
-  <section id="about">
-    <h2>Meet Alexis David</h2>
-    <div style="max-width: 750px; margin: 2rem auto; font-size: 1.1rem; line-height: 1.8;">
-      <p>
-        Hi, I'm <strong>Alexis David</strong> — a writer of cozy chaos and quiet intensity. I write stories for the young adult who stays up late wondering who they are, for the dreamer who believes there's magic hiding in the unremarkable, and for anyone who’s ever felt just a little out of place.
-      </p>
-      <p>
-        My work spans <em>young adult</em>, <em>coming-of-age</em>, <em>thrillers</em>, <em>romances</em>, <em>fantasy</em>, <em>literary fiction</em>, and <em>LGBTQ+ fiction</em>. Whether it’s a small-town page-turner unraveling in starlight, or a slow-burn love story between two lost souls, I’m drawn to characters who are figuring things out — imperfectly, beautifully, and often while holding onto secrets.
-      </p>
-      <p>
-        When I’m not writing, you’ll find me thrifting, playing with my cat, or learning weird facts at 2 a.m. I believe in softness, indestructible friendships, poetry, and characters who break your heart just a little.
-      </p>
-      <p>
-        Thank you for being here. You’re invited to get lost in a story, stay for a while, and maybe find a piece of yourself along the way.
-      </p>
+<section id="books" class="fade-in">
+  <h2>Books</h2>
+  <div class="book-listing">
+    <div class="book-card">
+      <img src="images/theothersideofokayfinalfrontcover.jpg" alt="the other side of okay cover">
+      <h3>the other side of okay</h3>
+      <p class="genre">YA • LGBTQ • Coming-of-Age</p>
+      <p>Two boys run into each other on the streets and slowly fall in love. A heart-wrenching journey of guilt and identity.</p>
+      <a href="book1.html">Read More</a>
     </div>
 
-  </section>
-
-  <section id="books">
-    <h2>Books by Alexis David</h2>
-    <div class="book-listing">
-
-      <!-- Book 1 -->
-      <div class="book-card">
-        <img src="images/theothersideofokayfinalfrontcover.jpg" alt="the other side of okay cover">
-        <h3>the other side of okay</h3>
-        <p class="genre">YA • LGBTQ • Coming-of-Age</p>
-        <p>Two boys run into each other on the streets, become fast friends, and slowly fall in love. But with their pasts intertwined in ways neither expected, their story veers into a relatable, heart-wrenching journey of guilt, identity, and what it means to truly know someone.</p>
-        <a href="book1.html">Read More</a>
-      </div>
-
-      <!-- Book 2 -->
-      <div class="book-card">
-        <img src="images/The Cedarwood Eight ebook.jpg" alt="Cover Pending!">
-        <h3>The Cedarwood Eight</h3>
-        <p class="genre">Coming-of-Age • Thriller • LGBTQ</p>
-        <p>As two teenagers fall in love at the Cedarwood Center for Growth and Recovery, they begin to realize that all is not what it seems, and the price of not realizing sooner might be their lives. A lyrical coming-of-age story that delves deep into the world of eating disorder recovery.</p>
-        <a href="book2.html">Read More</a>
-      </div>
-
-      <!-- Book 3 -->
-      <div class="book-card">
-        <img src="book3-cover.jpg" alt="Cover Pending!">
-        <h3>Chasing the Midnight Oil</h3>
-        <p class="genre">Fantasy • LGBTQ • YA</p>
-        <p>Two girls battling destiny and the threat of magic disappearing from their world for good. An evocative fantasy woven with longing and deceit.</p>
-        <a href="#">Read More</a>
-      </div>
+    <div class="book-card">
+      <img src="images/The Cedarwood Eight ebook.jpg" alt="The Cedarwood Eight cover">
+      <h3>The Cedarwood Eight</h3>
+      <p class="genre">Coming-of-Age • Thriller • LGBTQ</p>
+      <p>As two teenagers fall in love at a recovery center, they realize the price of staying might be their lives.</p>
+      <a href="book2.html">Read More</a>
     </div>
-  </section>
 
-  <section id="samples" style="background-color:#fff8f2; padding: 4rem 1rem; text-align: center; font-family: 'Quicksand', sans-serif;">
-  <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #4a3f35;">Read My Work</h2>
-  <p style="max-width: 700px; margin: 0 auto 2rem; font-size: 1.1rem; color: #4a3f35;">
-    Explore a selection of stories, excerpts, and moments pulled straight from my writing desk. Whether it’s a fierce flash fiction, a moody monologue, or a chapter that hasn’t quite found its novel yet — you’re welcome to dive in.
-  </p>
-  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; max-width: 1000px; margin: auto;">
-    <!-- Sample 1 -->
-    <div style="background-color: #f9f4ef; border: 1px solid #e1dad2; border-radius: 12px; padding: 1.5rem; width: 280px; text-align: left;">
-      <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem;">Daemon</h3>
-      <p style="font-size: 0.9rem; color: #7a6a5c;"><em>Short story • Literary Fantasy • Speculative Fiction</em></p>
-      <p>Daemon: An entity that exists in a metaphysical web and becomes a character once they attach themselves to a living author. What happens when one of these daemons goes off script as his author slowly runs out of time to achieve her dreams?</p>
-      <a href="placeholder.html?story=daemon" style="display: inline-block; margin-top: 1rem; background-color: #a67c52; color: white; padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none;">Read Now</a>
-    </div>
-    <!-- Sample 2 -->
-    <div style="background-color: #f9f4ef; border: 1px solid #e1dad2; border-radius: 12px; padding: 1.5rem; width: 280px; text-align: left;">
-      <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem;">Lady of Whispers</h3>
-      <p style="font-size: 0.9rem; color: #7a6a5c;"><em>Short story • Horror</em></p>
-      <p>Two children walk down a whispering set of steps, sharing stories of a town in which where scary is the status quo.</p>
-      <a href="placeholder.html?story=lady-of-whispers" style="display: inline-block; margin-top: 1rem; background-color: #a67c52; color: white; padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none;">Read Now</a>
-    </div>
-    <!-- Sample 3 -->
-    <div style="background-color: #f9f4ef; border: 1px solid #e1dad2; border-radius: 12px; padding: 1.5rem; width: 280px; text-align: left;">
-      <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem;">An Excerpt from "the other side of okay"</h3>
-      <p style="font-size: 0.9rem; color: #7a6a5c;"><em>Excerpt • LGBTQ+ • Coming-of-age</em></p>
-      <p>An excerpt from my novel "the other side of okay." A deeply emotional scene where two siblings discus loneliness and losing yourself.</p>
-      <a href="placeholder.html?story=other-side" style="display: inline-block; margin-top: 1rem; background-color: #a67c52; color: white; padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none;">Read Now</a>
+    <div class="book-card">
+      <img src="book3-cover.jpg" alt="Cover Pending!">
+      <h3>Chasing the Midnight Oil</h3>
+      <p class="genre">Fantasy • LGBTQ • YA</p>
+      <p>Two girls battling destiny and the threat of magic disappearing from their world for good.</p>
+      <a href="#">Read More</a>
     </div>
   </div>
 </section>
 
- <section id="newsletter" style="background-color:#f9f4ef; padding: 4rem 1rem; text-align: center; font-family: 'Quicksand', sans-serif;">
-  <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #4a3f35;">Stay in Touch</h2>
-  <p style="max-width: 600px; margin: 0 auto 2rem; font-size: 1.1rem; color: #4a3f35;">
-    Get cozy updates from my writing desk — book news, behind-the-scenes thoughts, exclusive excerpts, and the occasional interactive post.
-  </p>
-  <form action="https://formspree.io/f/mblyqqzo" method="POST" style="max-width: 400px; margin: auto;">
-    <input type="email" name="email" placeholder="Your email address" required
-      style="width: 100%; padding: 0.75rem 1rem; font-size: 1rem; border-radius: 6px; border: 1px solid #d9cfc7; margin-bottom: 1rem; font-family: 'Quicksand', sans-serif;">
-    <button type="submit"
-      style="background-color: #a67c52; color: white; border: none; padding: 0.75rem 1.5rem; font-size: 1rem; border-radius: 6px; cursor: pointer;">
-      Subscribe
-    </button>
+<section id="samples" class="fade-in">
+  <h2>Read My Work</h2>
+  <p style="margin-bottom: 3rem;">Explore a selection of stories and excerpts pulled straight from my writing desk.</p>
+  <div class="book-listing">
+    <div class="sample-card">
+      <h3>Daemon</h3>
+      <p class="genre">Literary Fantasy</p>
+      <p>What happens when a daemon goes off script as his author slowly runs out of time?</p>
+      <a href="placeholder.html?story=daemon" class="cta-btn">Read Now</a>
+    </div>
+    <div class="sample-card">
+      <h3>Lady of Whispers</h3>
+      <p class="genre">Horror</p>
+      <p>Two children walk down a whispering set of steps in a town where scary is the status quo.</p>
+      <a href="placeholder.html?story=lady-of-whispers" class="cta-btn">Read Now</a>
+    </div>
+  </div>
+</section>
+
+<section id="obsessions" class="fade-in">
+  <h2>Current Obsessions</h2>
+  <div class="obsession-container">
+    
+    <div class="obsession active">
+      <h3>📖 Currently Reading</h3>
+      <p><em>A Court of Thorns and Roses</em><br>by Sarah J. Maas</p>
+    </div>
+
+    <div class="obsession">
+      <h3>🎧 Writing To</h3>
+      <p>Big Thief • Noah Kahan • No Doubt</p>
+    </div>
+
+    <div class="obsession">
+      <h3>📜 Word of the Week</h3>
+      <div style="border: 1px dashed var(--ink-soft); padding: 1.5rem; border-radius: 4px; background: rgba(255,255,255,0.4);">
+        <h4 style="font-family: 'Special Elite', cursive; margin: 0; color: var(--rose-deep); font-size: 1.6rem;">flagitious</h4>
+        <p style="font-family: 'Quicksand', sans-serif; font-size: 0.9rem; font-style: italic; margin: 0.5rem 0;">(adj.) fla-gi-tious</p>
+        <p style="font-size: 1rem; margin-top: 0.5rem; line-height: 1.4;">Marked by scandalous crime or vice; shamefully wicked.</p>
+      </div>
+      <p class="caption">"A mood for the darker chapters..."</p>
+    </div>
+    
+  </div>
+</section>
+
+<section id="newsletter" class="fade-in">
+  <h2>Stay in Touch</h2>
+  <p>Get cozy updates—book news, behind-the-scenes thoughts, and exclusive excerpts.</p>
+  <form action="https://formspree.io/f/mblyqqzo" method="POST">
+    <input type="email" name="email" placeholder="Your email address" required>
+    <button type="submit">Subscribe</button>
   </form>
-</section> 
+</section>
 
-  <section id="contact" class="contact-section">
-    <h2>Get in Touch</h2>
-    <form action="https://formspree.io/f/mnnvlvgn" method="POST">
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email" required>
-      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-  </section>
+<section id="contact" class="fade-in">
+  <h2>Get in Touch</h2>
+  <form action="https://formspree.io/f/mnnvlvgn" method="POST">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
 
-  <script>
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-        }
-      });
+<script>
+  /* fade-in observer */
+  const fadeObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
     });
+  }, { threshold: 0.1 });
 
-    document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
-  </script>
+  document.querySelectorAll(".fade-in").forEach(el => fadeObserver.observe(el));
+
+  /* obsessions carousel logic */
+  const obsessions = document.querySelectorAll(".obsession");
+  let obsessionIndex = 0;
+
+  if (obsessions.length > 0) {
+    setInterval(() => {
+      obsessions[obsessionIndex].classList.remove("active");
+      obsessionIndex = (obsessionIndex + 1) % obsessions.length;
+      obsessions[obsessionIndex].classList.add("active");
+    }, 5000);
+  }
+</script>
 
 </body>
 </html>
