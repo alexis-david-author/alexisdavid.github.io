@@ -66,6 +66,68 @@
       width: 1em;
       margin-left: -1em;
     }
+    .reader-review-section {
+      margin: 3rem auto 2rem auto;
+      max-width: 760px;
+    }
+    .reader-review-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      color: var(--rose-dark);
+    }
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.25rem;
+    }
+    .review-card {
+      background: rgba(255,255,255,0.45);
+      border: 1px solid #e6d8cf;
+      border-radius: 14px;
+      padding: 1.2rem 1.1rem;
+      box-shadow: 0 4px 18px rgba(212, 165, 165, 0.06);
+    }
+    .review-source {
+      display: inline-block;
+      padding: 0.28rem 0.7rem;
+      border-radius: 999px;
+      background: #f7ede5;
+      color: var(--rose-dark);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+    .review-card p {
+      margin: 0;
+      line-height: 1.7;
+      font-size: 1rem;
+    }
+    .review-stars {
+      display: inline-block;
+      color: #d68a00;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+      font-size: 1.15rem;
+    }
+    .review-card small {
+      display: block;
+      color: rgba(74, 63, 53, 0.75);
+      margin-top: 0.65rem;
+      font-size: 0.82rem;
+    }
+    .amazon-review-link {
+      color: var(--brown);
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .amazon-review-link:hover,
+    .amazon-review-link:focus {
+      text-decoration: underline;
+    }
     .aesthetic-buy-section {
       background: linear-gradient(90deg, #fff8f2 50%, #f8f5ec 100%);
       border: 1px solid #e1dad2;
@@ -148,6 +210,44 @@
         <li><strong>Ben:</strong> Rylan's friend. Infinitely loyal, playful, and cares so deeply. Rylan and Ben have drifted apart, but even years cannot erase the bond they have created.</li>
         <li><strong>Mr.McGuire:</strong> Dalton's dad. He is grieving and distant children's book illustrator. He has the tendency to hole himself up in art studio for days on end. Sometimes even weeks.</li>
       </ul>
+    </div>
+
+    <div class="reader-review-section">
+      <h2>Reader Reviews</h2>
+      <div class="review-grid">
+        <div class="review-card">
+          <span class="review-source">Amazon</span>
+          <div class="review-stars">★★★★★</div>
+          <p>
+            Amazon customer rating: <strong>5 out of 5 stars</strong> based on <strong>4 ratings</strong>.
+            This book resonates with readers for its emotional honesty and vulnerable truths.
+          </p>
+          <small>
+            <a class="amazon-review-link" href="https://www.amazon.com/dp/B0FHCYJ8QS" target="_blank" rel="noopener">View on Amazon</a>
+          </small>
+        </div>
+
+        <div class="review-card">
+          <span class="review-source">Goodreads</span>
+          <p>
+            “This book was a roller coaster of emotions. There were so many ups and downs in the main characters lives and an atmosphere that made their situations feel much more realistic.”
+          </p>
+        </div>
+
+        <div class="review-card">
+          <span class="review-source">Goodreads</span>
+          <p>
+            “This book broke my heart. I wanted to jump into the pages so I could adopt Rylan and take hm home. Tears were shed. A fantastic read.”
+          </p>
+        </div>
+
+        <div class="review-card">
+          <span class="review-source">Goodreads</span>
+          <p>
+            “Totally amazing 🥰🥰, a must read.”
+          </p>
+        </div>
+      </div>
     </div>
 
     <!-- Aesthetic Amazon Buy Section -->
